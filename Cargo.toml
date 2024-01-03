@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rzpipe = { path = "rzpipe" }
+rzpipe = { git = "https://github.com/rizinorg/rz-pipe.git" }
 tempfile = "3.7.1"
 dynfmt = { version = "0.1.5", features = ["curly"] }
 serde = { version = "1.0.183", features = ["derive"] }

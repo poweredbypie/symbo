@@ -70,7 +70,7 @@ pub fn generate(rizin_proj: impl ToString) -> Result<ExecDB, Box<dyn std::error:
 
 	let mut pipe = RzPipe::spawn("-M", 	Some(RzPipeSpawnOptions {
 	    exepath: String::from("rizin"),
-	    args: vec!["-p".to_string(), rizin_proj.to_string()]
+	    args: vec!["-p", rizin_proj.to_string().leak()]
 	}))?;
 
 	let label_map: HashMap<String, u64> = pipe.cmd("aflq")?
