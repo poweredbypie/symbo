@@ -18,9 +18,6 @@ pub struct Generate {
     backend: Backend,
     proj: PathBuf,
 
-    /// Only currently used if selected with the Ghidra backend; the path to the Ghidra installation.
-    root: Option<PathBuf>,
-
     #[clap(short, long)]
     output: Option<PathBuf>,
 }
@@ -39,12 +36,7 @@ impl Generate {
 
         let out_data = match self.backend {
             Backend::Rizin => rizin::generate(self.proj.display().to_string()),
-            Backend::Ghidra => {
-                let root = self
-                    .root
-                    .ok_or("Ghidra root must be set with the Ghidra backend")?;
-                ghidra::generate(root, self.proj)
-            }
+            Backend::Ghidra => ghidra::generate(self.proj),
         }?;
         fs::write(&out_file, pot::to_vec(&out_data)?)?;
         Ok(())
